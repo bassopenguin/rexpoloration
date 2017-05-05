@@ -1,5 +1,6 @@
-# load the config library
-library("config")
+# Load the packages
+library("config") # load the config library
+library("ggplot2") # load the plot library
 
 # load the configuration
 config <- config::get()
@@ -14,12 +15,6 @@ costbasis <- (originalcb + current) / shares # appears red
 
 # Read the data
 data <- read.table(thefile, h = TRUE, sep = ",")
-
-# Set the working directory back
-setwd(oldwd)
-
-# Load the packages
-library("ggplot2")
 
 #current <- data$Close[1]
 short <- config$short
