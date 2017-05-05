@@ -7,16 +7,14 @@ config <- config::get()
 
 # set the file
 thefile <- config$file
+data <- read.table(thefile, h = TRUE, sep = ",") # Read the data
 thetitle <- paste(thefile, config$title, sep = " ")
 current <- config$current # appears green
 currshares <- config$currshares # amount of shares purchased at current price
 originalcb <- config$originalcb # appears blue
 origshares <- config$origshares # amount of shares owned at originalcb (original cost basis)
 costbasis <- (originalcb * origshares + current * currshares) / (origshares + currshares) # appears red
-print(paste("New cost basis:", format(costbasis, digits = 3, nsmall = 3), sep = " $"))
 
-# Read the data
-data <- read.table(thefile, h = TRUE, sep = ",")
 
 # Set periods for box plots
 short <- config$short
