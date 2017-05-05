@@ -8,7 +8,7 @@ config <- config::get()
 # set the file
 thefile <- config$file
 data <- read.table(thefile, h = TRUE, sep = ",") # Read the data
-thetitle <- paste(thefile, config$title, sep = " ")
+thetitle <- paste(thefile, config$dataset, sep = " ")
 current <- config$current # appears green
 currshares <- config$currshares # amount of shares purchased at current price
 originalcb <- config$originalcb # appears blue
@@ -53,6 +53,12 @@ theplot <- ggplot() +
               axis.ticks.x=element_blank(),
               axis.title.y=element_blank()) +
         ggtitle(thetitle)
+jitter <- config$jitter
+if (jitter == TRUE) {
+  theplot <- theplot + geom_jitter(data = ldf, aes(x = llabel, y = llows)) +
+        geom_jitter(data = mdf, aes(x = mlabel, y = mlows)) +
+        geom_jitter(data = sdf, aes(x = slabel, y = slows))
+}
 if (current > 0) {
   theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
         geom_text(aes(2,
@@ -62,14 +68,16 @@ if (current > 0) {
 }
 if (origshares > 0) {
   theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'blue') +
-        geom_text(aes(2,
-                      originalcb,
-                      label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
-                      vjust = -1)) +
-        geom_hline(yintercept = costbasis, colour = 'red') +
-        geom_text(aes(2,
-                      costbasis,
-                      label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
-                      vjust = -1))
+    geom_text(aes(2,
+                  originalcb,
+                  label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
+                  vjust = -1))
+  if (currshares > 0) {
+    theplot <- theplot + geom_hline(yintercept = costbasis, colour = 'red') +
+      geom_text(aes(2,
+                    costbasis,
+                    label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
+                    vjust = -1))
+  }
 }
 print(theplot)
