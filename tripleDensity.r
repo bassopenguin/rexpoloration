@@ -53,6 +53,12 @@ theplot <- ggplot() +
               axis.ticks.x=element_blank(),
               axis.title.y=element_blank()) +
         ggtitle(thetitle)
+jitter <- TRUE
+if (jitter == TRUE) {
+  theplot <- theplot + geom_jitter(data = ldf, aes(x = llabel, y = llows)) +
+        geom_jitter(data = mdf, aes(x = mlabel, y = mlows)) +
+        geom_jitter(data = sdf, aes(x = slabel, y = slows))
+}
 if (current > 0) {
   theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
         geom_text(aes(2,
