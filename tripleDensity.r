@@ -8,7 +8,7 @@ config <- config::get()
 # set the file
 thefile <- config$file
 data <- read.table(thefile, h = TRUE, sep = ",") # Read the data
-thetitle <- paste(thefile, config$title, sep = " ")
+thetitle <- paste(thefile, config$dataset, sep = " ")
 current <- config$current # appears green
 currshares <- config$currshares # amount of shares purchased at current price
 originalcb <- config$originalcb # appears blue
