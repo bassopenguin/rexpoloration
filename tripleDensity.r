@@ -22,7 +22,7 @@ medium <- config$medium
 long <- config$long
 
 # Set the fundamental data
-dataset <- config$dataset
+dataset <- data[ ,config$dataset]
 
 # Read data subsets 
 slows <- head(dataset, short)
