@@ -62,14 +62,16 @@ if (current > 0) {
 }
 if (origshares > 0) {
   theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'blue') +
-        geom_text(aes(2,
-                      originalcb,
-                      label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
-                      vjust = -1)) +
-        geom_hline(yintercept = costbasis, colour = 'red') +
-        geom_text(aes(2,
-                      costbasis,
-                      label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
-                      vjust = -1))
+    geom_text(aes(2,
+                  originalcb,
+                  label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
+                  vjust = -1))
+  if (currshares > 0) {
+    theplot <- theplot + geom_hline(yintercept = costbasis, colour = 'red') +
+      geom_text(aes(2,
+                    costbasis,
+                    label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
+                    vjust = -1))
+  }
 }
 print(theplot)
