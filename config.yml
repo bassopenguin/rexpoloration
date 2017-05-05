@@ -1,6 +1,9 @@
 default:
-  file:   "default.csv"
-  short:  20
-  medium: 50
-  long:   200
+  file:       "default.csv"
+  short:      20
+  medium:     50
+  long:       200
+  current:    0.00
+  originalcb: 0.00
+  shares:     2
   
