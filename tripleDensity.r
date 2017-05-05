@@ -8,9 +8,9 @@ config <- config::get()
 # set the file
 thefile <- config$file
 thetitle <- paste(thefile, "Highs", sep = " ") # TODO make "Highs" configurable
-current <- 0.00 # appears green TODO make configurable
-originalcb <- 0.00 # appears blue TODO make configurable 
-shares <- 2 # can't be zero TODO make configurable
+current <- config$current # appears green
+originalcb <- config$originalcb # appears blue
+shares <- config$shares # can't be zero
 costbasis <- (originalcb + current) / shares # appears red
 
 # Read the data
