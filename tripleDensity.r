@@ -1,13 +1,15 @@
-# Set the working directory
-oldwd <- getwd()
-setwd("~/Downloads/")
+# load the config library
+library("config")
+
+# load the configuration
+config <- config::get()
 
 # set the file
-thefile <- "*.csv" # TODO modify this line to include your file
-thetitle <- paste(thefile, "Highs", sep = " ")
-current <- 0.00 # appears green
-originalcb <- 0.00 # appears blue
-shares <- 2 # can't be zero
+thefile <- config$file
+thetitle <- paste(thefile, "Highs", sep = " ") # TODO make "Highs" configurable
+current <- 0.00 # appears green TODO make configurable
+originalcb <- 0.00 # appears blue TODO make configurable 
+shares <- 2 # can't be zero TODO make configurable
 costbasis <- (originalcb + current) / shares # appears red
 
 # Read the data
@@ -18,12 +20,11 @@ setwd(oldwd)
 
 # Load the packages
 library("ggplot2")
-#library("reshape2")
 
 #current <- data$Close[1]
-short <- 20
-medium <- 50
-long <- 200
+short <- config$short
+medium <- config$medium
+long <- config$long
 
 lows <- data$High
 slows <- head(lows, short)
