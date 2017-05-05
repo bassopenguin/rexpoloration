@@ -22,12 +22,12 @@ medium <- config$medium
 long <- config$long
 
 # Set the fundamental data
-lows <- data$High # TODO make configurable
+dataset <- config$dataset
 
 # Read data subsets 
-slows <- head(lows, short)
-mlows <- head(lows, medium)
-llows <- head(lows, long)
+slows <- head(dataset, short)
+mlows <- head(dataset, medium)
+llows <- head(dataset, long)
 
 # Make data subsets frames
 sdf <- data.frame(slows, vec = '1')
@@ -40,9 +40,9 @@ mmedian <- median(mlows)
 lmedian <- median(llows)
 
 # make the x-axis labels
-slabel <- paste("Short", format(smedian, digits = 2, nsmall = 2), sep = " $")
-mlabel <- paste("Medium", format(mmedian, digits = 2, nsmall = 2), sep = " $")
-llabel <- paste("Long", format(lmedian, digits = 2, nsmall = 2), sep = " $")
+slabel <- paste(paste("Short", format(short, nsmall = 0), sep = "-"), format(smedian, digits = 2, nsmall = 2), sep = " $")
+mlabel <- paste(paste("Medium", format(medium, nsmall = 0), sep = "-"), format(mmedian, digits = 2, nsmall = 2), sep = " $")
+llabel <- paste(paste("Long", format(long, nsmall = 0), sep = "-"), format(lmedian, digits = 2, nsmall = 2), sep = " $")
 
 # Print the result box plots
 print(ggplot() + 
