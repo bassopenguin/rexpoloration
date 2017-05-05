@@ -40,9 +40,9 @@ mmedian <- median(mlows)
 lmedian <- median(llows)
 
 # make the x-axis labels
-slabel <- paste("Short", format(smedian, digits = 2, nsmall = 2), sep = " $")
-mlabel <- paste("Medium", format(mmedian, digits = 2, nsmall = 2), sep = " $")
-llabel <- paste("Long", format(lmedian, digits = 2, nsmall = 2), sep = " $")
+slabel <- paste(paste("Short", format(short, nsmall = 0), sep = "-"), format(smedian, digits = 2, nsmall = 2), sep = " $")
+mlabel <- paste(paste("Medium", format(medium, nsmall = 0), sep = "-"), format(mmedian, digits = 2, nsmall = 2), sep = " $")
+llabel <- paste(paste("Long", format(long, nsmall = 0), sep = "-"), format(lmedian, digits = 2, nsmall = 2), sep = " $")
 
 # Print the result box plots
 print(ggplot() + 
