@@ -53,7 +53,7 @@ theplot <- ggplot() +
               axis.ticks.x=element_blank(),
               axis.title.y=element_blank()) +
         ggtitle(thetitle)
-jitter <- TRUE
+jitter <- config$jitter
 if (jitter == TRUE) {
   theplot <- theplot + geom_jitter(data = ldf, aes(x = llabel, y = llows)) +
         geom_jitter(data = mdf, aes(x = mlabel, y = mlows)) +

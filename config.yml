@@ -2,6 +2,7 @@ default:
   file:       "default.csv"
   title:      "Highs"
   dataset:    High
+  jitter:     TRUE
   short:      20
   medium:     50
   long:       200
