@@ -16,4 +16,5 @@ Exploration of R capabilities and limitations
   - Green: Current Price
   - Red: New Cost Basis
     - Computed by averaging original cost basis with new shares purchased at current price
+    - New cost basis is printed to log for reference 
 - Axis labels show period and median price for box plot
