@@ -1,0 +1,6 @@
+default:
+  file:   "default.csv"
+  short:  20
+  medium: 50
+  long:   200
+  
