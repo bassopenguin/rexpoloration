@@ -22,12 +22,12 @@ medium <- config$medium
 long <- config$long
 
 # Set the fundamental data
-lows <- data$High # TODO make configurable
+dataset <- config$dataset
 
 # Read data subsets 
-slows <- head(lows, short)
-mlows <- head(lows, medium)
-llows <- head(lows, long)
+slows <- head(dataset, short)
+mlows <- head(dataset, medium)
+llows <- head(dataset, long)
 
 # Make data subsets frames
 sdf <- data.frame(slows, vec = '1')
