@@ -9,9 +9,11 @@ config <- config::get()
 thefile <- config$file
 thetitle <- paste(thefile, config$title, sep = " ")
 current <- config$current # appears green
+currshares <- config$currshares # amount of shares purchased at current price
 originalcb <- config$originalcb # appears blue
-shares <- config$shares # can't be zero
-costbasis <- (originalcb + current) / shares # appears red
+origshares <- config$origshares # amount of shares owned at originalcb (original cost basis)
+costbasis <- (originalcb * origshares + current * currshares) / (origshares + currshares) # appears red
+print(paste("New cost basis:", format(costbasis, digits = 3, nsmall = 3), sep = " $"))
 
 # Read the data
 data <- read.table(thefile, h = TRUE, sep = ",")
