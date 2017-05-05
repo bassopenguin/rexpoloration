@@ -1,10 +1,11 @@
 default:
   file:       "default.csv"
   title:      "Highs"
-  dataset:    !expr data$High
+  dataset:    High
   short:      20
   medium:     50
   long:       200
   current:    0.00
+  currshares: 1
   originalcb: 0.00
-  shares:     2
+  origshares: 0
