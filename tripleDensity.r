@@ -45,27 +45,31 @@ mlabel <- paste(paste("Medium", format(medium, nsmall = 0), sep = "-"), format(m
 llabel <- paste(paste("Long", format(long, nsmall = 0), sep = "-"), format(lmedian, digits = 2, nsmall = 2), sep = " $")
 
 # Print the result box plots
-print(ggplot() + 
+theplot <- ggplot() + 
         geom_boxplot(data = ldf, aes(x = llabel, y = llows, fill = 'Long')) +
         geom_boxplot(data = mdf, aes(x = mlabel, y = mlows, fill = 'Medium')) +
         geom_boxplot(data = sdf, aes(x = slabel, y = slows, fill = 'Short')) +
-        geom_hline(yintercept = current, colour = 'green') +
-        geom_text(aes(2,
-                      current,
-                      label = paste("$", format(current, digits = 2, nsmall = 2), sep = ""), 
-                      vjust = -1)) +
-        geom_hline(yintercept = originalcb, colour = 'blue') +
-        geom_text(aes(2,
-                      originalcb,
-                      label = paste("$", format(originalcb, digits = 2, nsmall = 2), sep = ""),
-                      vjust = -1)) +
-        geom_hline(yintercept = costbasis, colour = 'red') +
-        geom_text(aes(2,
-                      costbasis,
-                      label = paste("$", format(costbasis, digits = 2, nsmall = 2), sep = ""),
-                      vjust = -1)) +
         theme(axis.title.x=element_blank(),
               axis.ticks.x=element_blank(),
               axis.title.y=element_blank()) +
         ggtitle(thetitle)
-      )
+if (current > 0) {
+  theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
+        geom_text(aes(2,
+                      current,
+                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                      vjust = -1))
+}
+if (origshares > 0) {
+  theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'blue') +
+        geom_text(aes(2,
+                      originalcb,
+                      label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
+                      vjust = -1)) +
+        geom_hline(yintercept = costbasis, colour = 'red') +
+        geom_text(aes(2,
+                      costbasis,
+                      label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
+                      vjust = -1))
+}
+print(theplot)
