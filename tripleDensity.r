@@ -50,8 +50,20 @@ print(ggplot() +
         geom_boxplot(data = mdf, aes(x = mlabel, y = mlows, fill = 'Medium')) +
         geom_boxplot(data = sdf, aes(x = slabel, y = slows, fill = 'Short')) +
         geom_hline(yintercept = current, colour = 'green') +
+        geom_text(aes(2,
+                      current,
+                      label = paste("$", format(current, digits = 2, nsmall = 2), sep = ""), 
+                      vjust = -1)) +
         geom_hline(yintercept = originalcb, colour = 'blue') +
+        geom_text(aes(2,
+                      originalcb,
+                      label = paste("$", format(originalcb, digits = 2, nsmall = 2), sep = ""),
+                      vjust = -1)) +
         geom_hline(yintercept = costbasis, colour = 'red') +
+        geom_text(aes(2,
+                      costbasis,
+                      label = paste("$", format(costbasis, digits = 2, nsmall = 2), sep = ""),
+                      vjust = -1)) +
         theme(axis.title.x=element_blank(),
               axis.ticks.x=element_blank(),
               axis.title.y=element_blank()) +
