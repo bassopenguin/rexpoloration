@@ -13,10 +13,10 @@ Exploration of R capabilities and limitations
 - Create three box plots based on three configured periods
   - Configurable jitter plot overlay for each box plot
 - Draw three horizontal lines denoting various price points
-  - Green: Current Price
-  - Blue: Original Cost Basis
+  - Current Price
+  - Original Cost Basis
     - Not displayed if original shares was configured <= 0
-  - Red: New Cost Basis
+  - New Cost Basis
     - Not displayed if current shares was configured <= 0
     - Computed by averaging original cost basis with new shares purchased at current price
 - Axis labels show period and median price for box plot
