@@ -59,26 +59,40 @@ if (jitter == TRUE) {
         geom_jitter(data = mdf, aes(x = mlabel, y = mlows)) +
         geom_jitter(data = sdf, aes(x = slabel, y = slows))
 }
-if (current > 0) {
-  theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
-        geom_text(aes(2,
-                      current,
-                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
-                      vjust = -1))
-}
 if (origshares > 0) {
-  theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'blue') +
+  theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'black') +
     geom_text(aes(2,
                   originalcb,
                   label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
                   vjust = -1))
+  if (current > 0) {
+    if (current > originalcb) {
+      theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
+        geom_text(aes(2,
+                    current,
+                    label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                    vjust = -1))
+    } else if (current < originalcb) {
+      theplot <- theplot + geom_hline(yintercept = current, colour = 'red') +
+        geom_text(aes(2,
+                      current,
+                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                      vjust = -1))
+    }
+  }
   if (currshares > 0) {
-    theplot <- theplot + geom_hline(yintercept = costbasis, colour = 'red') +
+    theplot <- theplot + geom_hline(yintercept = costbasis, colour = 'blue') +
       geom_text(aes(2,
                     costbasis,
                     label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
   }
+} else if (current > 0) {
+  theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
+        geom_text(aes(2,
+                      current,
+                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                      vjust = -1))
 }
 print(theplot)
 
