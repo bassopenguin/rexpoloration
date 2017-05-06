@@ -81,3 +81,14 @@ if (origshares > 0) {
   }
 }
 print(theplot)
+
+# if desired, print High/Low medians for short and long periods
+statslogging <- config$statslogging
+if (statslogging == TRUE) {
+  print("Short:")
+  print(paste("  High", format(median(head(data$High, short)), digits = 2, nsmall = 2), sep = " $"))
+  print(paste("  Low", format(median(head(data$Low, short)), digits = 2, nsmall = 2), sep = "  $"))
+  print("Long:")
+  print(paste("  High", format(median(head(data$High, long)), digits = 2, nsmall = 2), sep = " $"))
+  print(paste("  Low", format(median(head(data$Low, long)), digits = 2, nsmall = 2), sep = "  $"))
+}
