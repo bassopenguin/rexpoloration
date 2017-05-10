@@ -11,9 +11,10 @@ data <- read.table(thefile, h = TRUE, sep = ",") # Read the data
 thetitle <- paste(thefile, config$dataset, sep = " ")
 current <- config$current # appears green
 currshares <- config$currshares # amount of shares purchased at current price
-originalcb <- config$originalcb # appears blue
-origshares <- config$origshares # amount of shares owned at originalcb (original cost basis)
-costbasis <- (originalcb * origshares + current * currshares) / (origshares + currshares) # appears red
+originalcb <- config$originalcb # appears blue (original cost basis)
+origshares <- config$origshares # amount of shares at originalcb
+costbasis <- (originalcb * origshares + current * currshares) /
+  (origshares + currshares)
 
 
 # Set periods for box plots
@@ -22,17 +23,17 @@ medium <- config$medium
 long <- config$long
 
 # Set the fundamental data
-dataset <- data[ ,config$dataset]
+dataset <- data[, config$dataset]
 
-# Read data subsets 
+# Read data subsets
 slows <- head(dataset, short)
 mlows <- head(dataset, medium)
 llows <- head(dataset, long)
 
 # Make data subsets frames
-sdf <- data.frame(slows, vec = '1')
-mdf <- data.frame(mlows, vec = '2')
-ldf <- data.frame(llows, vec = '3')
+sdf <- data.frame(slows, vec = "1")
+mdf <- data.frame(mlows, vec = "2")
+ldf <- data.frame(llows, vec = "3")
 
 # make the medians
 smedian <- median(slows)
@@ -40,18 +41,27 @@ mmedian <- median(mlows)
 lmedian <- median(llows)
 
 # make the x-axis labels
-slabel <- paste(paste("Short", format(short, nsmall = 0), sep = "-"), format(smedian, digits = 2, nsmall = 2), sep = " $")
-mlabel <- paste(paste("Medium", format(medium, nsmall = 0), sep = "-"), format(mmedian, digits = 2, nsmall = 2), sep = " $")
-llabel <- paste(paste("Long", format(long, nsmall = 0), sep = "-"), format(lmedian, digits = 2, nsmall = 2), sep = " $")
+slabel <- paste(paste("Short",
+  format(short, nsmall = 0), sep = "-"),
+  format(smedian, digits = 2, nsmall = 2),
+  sep = " $")
+mlabel <- paste(paste("Medium",
+  format(medium, nsmall = 0), sep = "-"),
+  format(mmedian, digits = 2, nsmall = 2),
+  sep = " $")
+llabel <- paste(paste("Long",
+  format(long, nsmall = 0), sep = "-"),
+  format(lmedian, digits = 2, nsmall = 2),
+  sep = " $")
 
 # Print the result box plots
-theplot <- ggplot() + 
-        geom_boxplot(data = ldf, aes(x = llabel, y = llows, fill = 'Long')) +
-        geom_boxplot(data = mdf, aes(x = mlabel, y = mlows, fill = 'Medium')) +
-        geom_boxplot(data = sdf, aes(x = slabel, y = slows, fill = 'Short')) +
-        theme(axis.title.x=element_blank(),
-              axis.ticks.x=element_blank(),
-              axis.title.y=element_blank()) +
+theplot <- ggplot() +
+        geom_boxplot(data = ldf, aes(x = llabel, y = llows, fill = "Long")) +
+        geom_boxplot(data = mdf, aes(x = mlabel, y = mlows, fill = "Medium")) +
+        geom_boxplot(data = sdf, aes(x = slabel, y = slows, fill = "Short")) +
+        theme(axis.title.x = element_blank(),
+              axis.ticks.x = element_blank(),
+              axis.title.y = element_blank()) +
         ggtitle(thetitle)
 jitter <- config$jitter
 if (jitter == TRUE) {
@@ -60,38 +70,43 @@ if (jitter == TRUE) {
         geom_jitter(data = sdf, aes(x = slabel, y = slows))
 }
 if (origshares > 0) {
-  theplot <- theplot +  geom_hline(yintercept = originalcb, colour = 'black') +
+  theplot <- theplot +  geom_hline(yintercept = originalcb, colour = "black") +
     geom_text(aes(2,
                   originalcb,
-                  label = paste("Original", format(originalcb, digits = 2, nsmall = 2), sep = " $"),
+                  label = paste("Original",
+                    format(originalcb, digits = 2, nsmall = 2), sep = " $"),
                   vjust = -1))
   if (current > 0) {
     if (current > originalcb) {
-      theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
+      theplot <- theplot + geom_hline(yintercept = current, colour = "green") +
         geom_text(aes(2,
                     current,
-                    label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                    label = paste("Current",
+                      format(current, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
     } else if (current < originalcb) {
-      theplot <- theplot + geom_hline(yintercept = current, colour = 'red') +
+      theplot <- theplot + geom_hline(yintercept = current, colour = "red") +
         geom_text(aes(2,
                       current,
-                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                      label = paste("Current",
+                        format(current, digits = 2, nsmall = 2), sep = " $"),
                       vjust = -1))
     }
   }
   if (currshares > 0) {
-    theplot <- theplot + geom_hline(yintercept = costbasis, colour = 'blue') +
+    theplot <- theplot + geom_hline(yintercept = costbasis, colour = "blue") +
       geom_text(aes(2,
                     costbasis,
-                    label = paste("New", format(costbasis, digits = 2, nsmall = 2), sep = " $"),
+                    label = paste("New",
+                      format(costbasis, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
   }
 } else if (current > 0) {
-  theplot <- theplot + geom_hline(yintercept = current, colour = 'green') +
+  theplot <- theplot + geom_hline(yintercept = current, colour = "green") +
         geom_text(aes(2,
                       current,
-                      label = paste("Current", format(current, digits = 2, nsmall = 2), sep = " $"), 
+                      label = paste("Current",
+                        format(current, digits = 2, nsmall = 2), sep = " $"),
                       vjust = -1))
 }
 print(theplot)
@@ -100,9 +115,30 @@ print(theplot)
 statslogging <- config$statslogging
 if (statslogging == TRUE) {
   print("Short:")
-  print(paste("  High", format(median(head(data$High, short)), digits = 2, nsmall = 2), sep = " $"))
-  print(paste("  Low", format(median(head(data$Low, short)), digits = 2, nsmall = 2), sep = "  $"))
+  print(paste("  High",
+    format(
+      median(
+        head(data$High, short)
+      ),
+      digits = 2, nsmall = 2),
+      sep = " $"))
+  print(paste("  Low",
+    format(
+      median(
+        head(data$Low, short)),
+        digits = 2, nsmall = 2),
+        sep = "  $"))
   print("Long:")
-  print(paste("  High", format(median(head(data$High, long)), digits = 2, nsmall = 2), sep = " $"))
-  print(paste("  Low", format(median(head(data$Low, long)), digits = 2, nsmall = 2), sep = "  $"))
+  print(paste("  High",
+    format(
+      median(
+        head(data$High, long)),
+        digits = 2, nsmall = 2),
+        sep = " $"))
+  print(paste("  Low",
+    format(
+      median(
+        head(data$Low, long)),
+        digits = 2, nsmall = 2),
+        sep = "  $"))
 }

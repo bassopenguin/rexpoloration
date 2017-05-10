@@ -4,6 +4,7 @@ Exploration of R capabilities and limitations
 ## Purpose
 - Understand R language
 - Practice git skills
+- Practice Markdown skills
 - Understand capabilities and limitations of tools
 
 ### Code Function
@@ -39,3 +40,9 @@ Exploration of R capabilities and limitations
 - Else
   - If current > 0
     - Draw current GREEN
+
+
+### Future enhancements
+- [x] Solve Lintr problems
+- [ ] Create additional optimizations
+- [ ] Convert to Shiny app with interactivity
