@@ -15,6 +15,7 @@ originalcb <- config$originalcb # appears blue (original cost basis)
 origshares <- config$origshares # amount of shares at originalcb
 costbasis <- (originalcb * origshares + current * currshares) /
   (origshares + currshares)
+target <- costbasis * config$targetreturn
 
 
 # Set periods for box plots
