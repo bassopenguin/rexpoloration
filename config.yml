@@ -4,6 +4,7 @@ default:
   jitter:       TRUE
   statslogging: TRUE
   showtarget:   FALSE
+  targetreturn: 1.07
   short:        20
   medium:       50
   long:         200
