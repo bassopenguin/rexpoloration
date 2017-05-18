@@ -131,7 +131,12 @@ print(theplot)
 # if desired, print High/Low medians for short and long periods
 statslogging <- config$statslogging
 if (statslogging == TRUE) {
-  print(paste("Short:", format(short, digits = 0, nsmall = 0), data$Date[short], sep = " "))
+  print(paste("Short:",
+    format(short,
+           digits = 0,
+           nsmall = 0),
+    data$Date[short],
+    sep = " "))
   print(paste("  High",
     format(
       median(
@@ -145,7 +150,12 @@ if (statslogging == TRUE) {
         head(data$Low, short)),
         digits = 2, nsmall = 2),
         sep = "  $"))
-  print(paste("Long:", format(long, digits = 0, nsmall = 0), data$Date[long], sep = " "))
+  print(paste("Long:",
+    format(long,
+           digits = 0,
+           nsmall = 0),
+    data$Date[long],
+    sep = " "))
   print(paste("  High",
     format(
       median(
