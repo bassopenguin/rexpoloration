@@ -101,6 +101,8 @@ if (origshares > 0) {
                     label = paste("New",
                       format(costbasis, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
+  }
+  if (config$showtarget == TRUE) {
     theplot <- theplot + geom_hline(yintercept = costbasis * 1.07, colour = "yellow") +
       geom_text(aes(2,
                     costbasis * 1.07,
@@ -115,6 +117,14 @@ if (origshares > 0) {
                       label = paste("Current",
                         format(current, digits = 2, nsmall = 2), sep = " $"),
                       vjust = -1))
+  if (config$showtarget == TRUE) {
+    theplot <- theplot + geom_hline(yintercept = costbasis * 1.07, colour = "yellow") +
+      geom_text(aes(2,
+                    costbasis * 1.07,
+                    label = paste("Target",
+                      format(costbasis * 1.07, digits = 2, nsmall = 2), sep = " $"),
+                    vjust = -1))
+  }
 }
 print(theplot)
 
