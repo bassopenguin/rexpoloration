@@ -103,11 +103,11 @@ if (origshares > 0) {
                     vjust = -1))
   }
   if (config$showtarget == TRUE) {
-    theplot <- theplot + geom_hline(yintercept = costbasis * 1.07, colour = "yellow") +
+    theplot <- theplot + geom_hline(yintercept = target, colour = "yellow") +
       geom_text(aes(2,
-                    costbasis * 1.07,
+                    target,
                     label = paste("Target",
-                      format(costbasis * 1.07, digits = 2, nsmall = 2), sep = " $"),
+                      format(target, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
   }
 } else if (current > 0) {
@@ -118,11 +118,11 @@ if (origshares > 0) {
                         format(current, digits = 2, nsmall = 2), sep = " $"),
                       vjust = -1))
   if (config$showtarget == TRUE) {
-    theplot <- theplot + geom_hline(yintercept = costbasis * 1.07, colour = "yellow") +
+    theplot <- theplot + geom_hline(yintercept = target, colour = "yellow") +
       geom_text(aes(2,
-                    costbasis * 1.07,
+                    target,
                     label = paste("Target",
-                      format(costbasis * 1.07, digits = 2, nsmall = 2), sep = " $"),
+                      format(target, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
   }
 }
