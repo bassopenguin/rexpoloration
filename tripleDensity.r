@@ -15,6 +15,7 @@ originalcb <- config$originalcb # appears blue (original cost basis)
 origshares <- config$origshares # amount of shares at originalcb
 costbasis <- (originalcb * origshares + current * currshares) /
   (origshares + currshares)
+target <- costbasis * config$targetreturn
 
 
 # Set periods for box plots
@@ -101,6 +102,14 @@ if (origshares > 0) {
                       format(costbasis, digits = 2, nsmall = 2), sep = " $"),
                     vjust = -1))
   }
+  if (config$showtarget == TRUE) {
+    theplot <- theplot + geom_hline(yintercept = target, colour = "yellow") +
+      geom_text(aes(2,
+                    target,
+                    label = paste("Target",
+                      format(target, digits = 2, nsmall = 2), sep = " $"),
+                    vjust = -1))
+  }
 } else if (current > 0) {
   theplot <- theplot + geom_hline(yintercept = current, colour = "green") +
         geom_text(aes(2,
@@ -108,13 +117,21 @@ if (origshares > 0) {
                       label = paste("Current",
                         format(current, digits = 2, nsmall = 2), sep = " $"),
                       vjust = -1))
+  if (config$showtarget == TRUE) {
+    theplot <- theplot + geom_hline(yintercept = target, colour = "yellow") +
+      geom_text(aes(2,
+                    target,
+                    label = paste("Target",
+                      format(target, digits = 2, nsmall = 2), sep = " $"),
+                    vjust = -1))
+  }
 }
 print(theplot)
 
 # if desired, print High/Low medians for short and long periods
 statslogging <- config$statslogging
 if (statslogging == TRUE) {
-  print("Short:")
+  print(paste("Short:", format(short, digits = 0, nsmall = 0), data$Date[short], sep = " "))
   print(paste("  High",
     format(
       median(
@@ -128,7 +145,7 @@ if (statslogging == TRUE) {
         head(data$Low, short)),
         digits = 2, nsmall = 2),
         sep = "  $"))
-  print("Long:")
+  print(paste("Long:", format(long, digits = 0, nsmall = 0), data$Date[long], sep = " "))
   print(paste("  High",
     format(
       median(
